@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#061933" />
+  <link rel="icon" href="data:," />
+  <title>iKlinq — The ecosystem for cleaning professionals</title>
+  <meta name="description" content="Management, connections, opportunities, and clients in one ecosystem built for cleaning professionals and businesses." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+    :root {
+      --bg: #082142;
+      --bg-deep: #05162d;
+      --panel: #0b2a52;
+      --panel-2: #0d3260;
+      --line: rgba(161, 207, 255, .18);
+      --text: #f7fbff;
+      --muted: #b8c8db;
+      --silver: #dce5ef;
+      --blue: #2e79ff;
+      --cyan: #20d9ee;
+      --cyan-soft: #9cf5ff;
+      --shadow: 0 28px 90px rgba(0, 5, 18, .44);
+      --radius: 26px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #061933;
+        --bg-deep: #030e20;
+        --panel: #092446;
+        --panel-2: #0a2c55;
+        --line: rgba(161, 207, 255, .16);
+        --text: #f8fbff;
+        --muted: #adbed2;
+        --silver: #dae4ee;
+        --shadow: 0 30px 100px rgba(0, 0, 0, .5);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 80% 8%, rgba(21, 139, 255, .16), transparent 30rem),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 58%, #020a18 100%);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .16;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 72%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .shell { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 92px;
+      position: relative;
+      z-index: 4;
+    }
+    .brand { width: 156px; height: 55px; object-fit: cover; object-position: center; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; font-size: 14px; color: var(--silver); }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--cyan-soft); }
+    .language-switcher {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: rgba(4, 20, 42, .5);
+    }
+    .language-switcher button {
+      appearance: none;
+      border: 0;
+      border-radius: 6px;
+      min-width: 32px;
+      min-height: 28px;
+      padding: 0 7px;
+      background: transparent;
+      color: #91aac3;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      transition: background .2s ease, color .2s ease;
+    }
+    .language-switcher button:hover { color: var(--text); }
+    .language-switcher button[aria-pressed="true"] { background: var(--cyan); color: #031326; }
+    .nav-cta {
+      padding: 10px 17px;
+      border: 1px solid rgba(72, 213, 246, .42);
+      border-radius: 999px;
+      color: var(--text) !important;
+      background: rgba(13, 58, 101, .46);
+    }
+
+    .hero {
+      min-height: 710px;
+      padding: 72px 0 96px;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: clamp(44px, 7vw, 92px);
+      align-items: center;
+      position: relative;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cyan-soft);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .eyebrow::before { content: ""; width: 27px; height: 2px; background: var(--cyan); }
+    h1, h2, h3 { font-family: "Manrope", sans-serif; margin: 0; letter-spacing: -.035em; }
+    h1 { font-size: clamp(47px, 6.3vw, 84px); line-height: .98; max-width: 760px; }
+    h1 span { color: var(--cyan); }
+    .hero-copy > p { max-width: 600px; color: var(--muted); font-size: clamp(17px, 1.65vw, 20px); line-height: 1.65; margin: 27px 0 34px; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 15px; }
+    .btn {
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn-primary { background: linear-gradient(115deg, var(--blue), var(--cyan)); color: #031326; box-shadow: 0 14px 36px rgba(20, 158, 239, .27); }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-secondary { border: 1px solid var(--line); background: rgba(255,255,255,.035); color: var(--silver); }
+    .btn-secondary:hover { background: rgba(255,255,255,.07); }
+    .arrow { font-size: 19px; }
+    .fine { margin-top: 22px; color: #8da4bd; font-size: 12px; }
+
+    .product-stage {
+      --stage-x: 0px;
+      --stage-y: 0px;
+      position: relative;
+      min-height: 690px;
+      display: grid;
+      place-items: center;
+      perspective: 1100px;
+    }
+    .product-stage::before {
+      content: "";
+      position: absolute;
+      width: 75%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(38, 204, 246, .22), rgba(28, 87, 221, .04) 54%, transparent 72%);
+      filter: blur(8px);
+      animation: haloBreathe 5.5s ease-in-out infinite;
+    }
+    .phone {
+      position: relative;
+      z-index: 2;
+      width: min(320px, 76vw);
+      aspect-ratio: 71.5 / 149.6;
+      border: 1px solid rgba(212, 232, 255, .28);
+      border-radius: 42px;
+      padding: 10px;
+      background: linear-gradient(145deg, #60758f, #081529 18%, #020916 82%, #6d8dac);
+      box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.15);
+      transform: translate3d(var(--stage-x), var(--stage-y), 0) rotate(3.2deg);
+      transform-style: preserve-3d;
+      animation: heroPhoneFloat 4.8s cubic-bezier(.45,.05,.28,1) infinite;
+    }
+    .phone::after {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      z-index: 4;
+      pointer-events: none;
+      border-radius: 29px;
+      background: linear-gradient(112deg, transparent 28%, rgba(255,255,255,.18) 46%, transparent 64%);
+      transform: translateX(-130%);
+      animation: screenSweep 5.8s ease-in-out infinite 1.1s;
+    }
+    .screen {
+      height: 100%;
+      overflow: hidden;
+      border-radius: 31px;
+      background: linear-gradient(150deg, #0d3563 0%, #081f3d 55%, #04152c 100%);
+      padding: 24px 18px;
+      position: relative;
+    }
+    .island { width: 72px; height: 19px; border-radius: 20px; background: #020812; margin: -14px auto 23px; }
+    .screen-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #a9bfd6; }
+    .avatar { width: 35px; height: 35px; border-radius: 12px; display: grid; place-items: center; color: #021428; font-weight: 800; background: linear-gradient(140deg, var(--cyan), var(--blue)); }
+    .greeting { margin: 21px 0 16px; }
+    .greeting small { color: #8da6bf; display: block; }
+    .greeting strong { font-family: "Manrope"; font-size: 20px; }
+    .balance { padding: 18px; background: linear-gradient(130deg, #1e70f2, #16c8e7); border-radius: 18px; color: #03172b; }
+    .balance small { font-weight: 700; opacity: .7; }
+    .balance b { font-family: "Manrope"; display: block; font-size: 25px; margin-top: 3px; }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 11px 0 20px; }
+    .metric { background: rgba(255,255,255,.07); padding: 12px; border-radius: 13px; border: 1px solid rgba(255,255,255,.07); }
+    .metric small { color: #89a5c0; font-size: 10px; }
+    .metric strong { display: block; font-size: 16px; }
+    .section-label { font-size: 12px; font-weight: 700; color: #dcecff; margin-bottom: 10px; }
+    .task { display: grid; grid-template-columns: 8px 1fr auto; gap: 10px; align-items: center; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.08); font-size: 11px; }
+    .task i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px rgba(32,217,238,.5); }
+    .task span { color: #a9bfd4; }
+    .task b { font-size: 10px; color: #e9f5ff; }
+    .float-card {
+      position: absolute;
+      z-index: 3;
+      background: rgba(9, 36, 70, .92);
+      border: 1px solid rgba(84, 215, 245, .24);
+      box-shadow: 0 18px 42px rgba(0, 4, 16, .4);
+      backdrop-filter: blur(16px);
+      padding: 15px 17px;
+      border-radius: 15px;
+      font-size: 12px;
+      min-width: 160px;
+    }
+    .float-card strong { display: block; font-size: 15px; color: var(--text); }
+    .float-card span { color: #93abc4; }
+    .float-card.one { top: 74px; left: 0; animation: cardDriftOne 4.8s ease-in-out infinite; }
+    .float-card.two { right: -5px; bottom: 77px; animation: cardDriftTwo 5.2s ease-in-out infinite .35s; }
+    .pulse { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); margin-right: 6px; box-shadow: 0 0 0 5px rgba(32,217,238,.1); }
+    .phone-back {
+      position: absolute;
+      z-index: 1;
+      width: 224px;
+      aspect-ratio: 71.5 / 149.6;
+      border: 1px solid rgba(174, 214, 255, .2);
+      border-radius: 31px;
+      padding: 9px;
+      background: #061326;
+      box-shadow: 0 24px 60px rgba(0, 5, 18, .38);
+      opacity: .72;
+      transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+    }
+    .phone-back.left { transform: translate(-124px, 18px) rotate(-10deg); animation: backPhoneLeft 5.4s ease-in-out infinite; }
+    .phone-back.right { transform: translate(122px, 12px) rotate(12deg); animation: backPhoneRight 5.7s ease-in-out infinite -.7s; }
+    .product-stage:hover .phone-back { opacity: .92; }
+    .back-screen { height: 100%; border-radius: 22px; overflow: hidden; padding: 29px 14px 15px; background: linear-gradient(160deg, #0c3461, #06182f); }
+    .back-label { color: #86a6c5; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+    .back-screen h4 { font: 700 16px/1.2 "Manrope", sans-serif; margin: 7px 0 16px; }
+    .community-person { display: flex; gap: 9px; align-items: center; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.07); }
+    .person-dot { width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; background: linear-gradient(135deg, #2e79ff, #20d9ee); }
+    .person-lines { width: 90px; }
+    .person-lines i, .market-tile i { display: block; height: 5px; border-radius: 8px; background: rgba(219,239,255,.42); margin: 5px 0; }
+    .person-lines i:last-child { width: 64%; background: rgba(219,239,255,.17); }
+    .market-tile { padding: 13px; margin: 9px 0; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.045); border-radius: 12px; }
+    .market-tile em { display: block; color: var(--cyan); font-style: normal; font-size: 9px; margin-top: 9px; }
+    .product-stage:hover .phone { animation-duration: 3.2s; }
+
+    @keyframes heroPhoneFloat {
+      0%, 100% { transform: translate3d(var(--stage-x), var(--stage-y), 0) rotate(3deg); }
+      50% { transform: translate3d(var(--stage-x), calc(var(--stage-y) - 15px), 0) rotate(.3deg); }
+    }
+    @keyframes backPhoneLeft {
+      0%, 100% { transform: translate(-124px, 18px) rotate(-10deg); }
+      50% { transform: translate(-139px, 7px) rotate(-12deg); }
+    }
+    @keyframes backPhoneRight {
+      0%, 100% { transform: translate(122px, 12px) rotate(12deg); }
+      50% { transform: translate(139px, 1px) rotate(14deg); }
+    }
+    @keyframes screenSweep {
+      0%, 62% { transform: translateX(-130%); opacity: 0; }
+      72% { opacity: 1; }
+      88%, 100% { transform: translateX(130%); opacity: 0; }
+    }
+    @keyframes haloBreathe {
+      0%, 100% { transform: scale(.94); opacity: .7; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    @keyframes cardDriftOne {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(-4px, -10px, 0); }
+    }
+    @keyframes cardDriftTwo {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(5px, -8px, 0); }
+    }
+    @keyframes panelEnter {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes barGrow {
+      from { transform: scaleY(.08); opacity: .2; }
+      to { transform: scaleY(1); opacity: .82; }
+    }
+    .tour-panel.active { animation: panelEnter .48s cubic-bezier(.2,.8,.2,1) both; }
+    .tour-panel.active .chart i { transform-origin: bottom; animation: barGrow .65s cubic-bezier(.2,.8,.2,1) both; }
+    .tour-panel.active .chart i:nth-child(2) { animation-delay: .05s; }
+    .tour-panel.active .chart i:nth-child(3) { animation-delay: .1s; }
+    .tour-panel.active .chart i:nth-child(4) { animation-delay: .15s; }
+    .tour-panel.active .chart i:nth-child(5) { animation-delay: .2s; }
+    .tour-panel.active .chart i:nth-child(6) { animation-delay: .25s; }
+    .motion-ready .reveal {
+      opacity: 0;
+      transform: translateY(38px) scale(.975);
+      filter: blur(4px);
+      transition: opacity .72s ease, transform .82s cubic-bezier(.16,1,.3,1), filter .72s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    .motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .motion-ready .hero-copy > * { animation: panelEnter .75s cubic-bezier(.2,.8,.2,1) both; }
+    .motion-ready .hero-copy > *:nth-child(1) { animation-delay: .08s; }
+    .motion-ready .hero-copy > *:nth-child(2) { animation-delay: .16s; }
+    .motion-ready .hero-copy > *:nth-child(3) { animation-delay: .25s; }
+    .motion-ready .hero-copy > *:nth-child(4) { animation-delay: .34s; }
+    .motion-ready .hero-copy > *:nth-child(5) { animation-delay: .42s; }
+
+    .trust { border-block: 1px solid var(--line); background: rgba(3, 17, 37, .25); }
+    .trust-inner { min-height: 112px; display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 28px; align-items: center; }
+    .trust p { color: var(--muted); font-size: 13px; max-width: 220px; }
+    .trust-item { display: flex; align-items: center; gap: 11px; font-weight: 700; color: var(--silver); font-size: 14px; }
+    .trust-item svg { width: 23px; height: 23px; stroke: var(--cyan); fill: none; stroke-width: 1.7; }
+
+    section { padding: 116px 0; }
+    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 58px; }
+    .section-head h2 { font-size: clamp(36px, 4.5vw, 60px); line-height: 1.07; }
+    .section-head p { color: var(--muted); font-size: 17px; margin: 0; max-width: 520px; }
+
+    .platform-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 18px; }
+    .feature {
+      position: relative;
+      min-height: 280px;
+      padding: 32px;
+      background: linear-gradient(145deg, rgba(15, 53, 99, .78), rgba(5, 25, 52, .9));
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .feature:nth-child(1) { border-radius: 8px 32px 8px 8px; }
+    .feature:nth-child(2) { border-radius: 32px 8px 8px 8px; }
+    .feature:nth-child(3) { border-radius: 8px 8px 8px 32px; }
+    .feature:nth-child(4) { border-radius: 8px 8px 32px 8px; }
+    .feature-num { color: var(--cyan); font-family: "Manrope"; font-weight: 800; font-size: 13px; }
+    .feature h3 { font-size: 25px; margin: 55px 0 12px; }
+    .feature p { color: var(--muted); margin: 0; max-width: 420px; font-size: 15px; }
+    .feature svg { position: absolute; width: 100px; height: 100px; right: 26px; top: 28px; stroke: rgba(72, 213, 246, .2); fill: none; stroke-width: 1.2; }
+
+    .product-tour { padding-top: 128px; }
+    .tour-intro { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 7vw, 96px); align-items: end; margin-bottom: 36px; }
+    .tour-intro h2 { font-size: clamp(38px, 4.8vw, 64px); line-height: 1.02; }
+    .tour-copy { color: var(--muted); font-size: 17px; max-width: 560px; margin: 0; }
+    .tour-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+    .tour-tab {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+      color: var(--muted);
+      min-height: 44px;
+      padding: 0 17px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .tour-tab:hover { color: var(--text); border-color: rgba(70, 213, 246, .42); }
+    .tour-tab[aria-pressed="true"] { color: #031326; border-color: transparent; background: var(--cyan); }
+    .showcase {
+      position: relative;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: 10px 34px 10px 34px;
+      overflow: hidden;
+      background: linear-gradient(150deg, #0b2d56 0%, #061a35 58%, #041326 100%);
+      box-shadow: var(--shadow);
+    }
+    .showcase::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 75% 12%, rgba(32,217,238,.12), transparent 32%); }
+    .showcase-bar { min-height: 55px; padding: 0 19px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); color: #8ea8c3; font-size: 11px; }
+    .window-dots { display: flex; gap: 6px; }
+    .window-dots i { display: block; width: 7px; height: 7px; border-radius: 50%; background: #315171; }
+    .window-dots i:first-child { background: var(--cyan); }
+    .screen-counter { font-weight: 700; letter-spacing: .08em; }
+    .tour-panel { display: none; min-height: 565px; grid-template-columns: 190px 1fr; position: relative; }
+    .tour-panel.active { display: grid; }
+    .demo-side { border-right: 1px solid var(--line); padding: 26px 20px; background: rgba(2,12,26,.3); }
+    .demo-side strong { display: block; font: 700 17px "Manrope"; margin-bottom: 27px; }
+    .side-item { display: flex; align-items: center; gap: 10px; padding: 10px 9px; margin: 4px 0; color: #88a4bf; border-radius: 8px; font-size: 12px; }
+    .side-item.active { background: rgba(32,217,238,.1); color: var(--cyan-soft); }
+    .side-icon { width: 7px; height: 7px; border-radius: 2px; border: 1px solid currentColor; }
+    .demo-main { padding: 30px 34px; min-width: 0; }
+    .demo-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 25px; }
+    .demo-head small { display: block; color: #86a1bc; margin-bottom: 4px; }
+    .demo-head h3 { font-size: clamp(23px, 3vw, 34px); }
+    .demo-action { padding: 9px 13px; border-radius: 8px; background: var(--cyan); color: #04162a; font-size: 11px; font-weight: 800; white-space: nowrap; }
+    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+    .stat-box, .demo-card { background: rgba(255,255,255,.045); border: 1px solid rgba(171,211,252,.1); }
+    .stat-box { padding: 17px; min-height: 96px; border-radius: 13px; }
+    .stat-box small { color: #8aa5bf; display: block; }
+    .stat-box strong { font: 800 25px "Manrope"; display: block; margin-top: 7px; }
+    .stat-box em { color: var(--cyan); font-size: 10px; font-style: normal; }
+    .demo-grid { display: grid; grid-template-columns: 1.22fr .78fr; gap: 13px; }
+    .demo-card { border-radius: 14px; padding: 18px; min-height: 220px; }
+    .card-title { font: 700 13px "Manrope"; display: flex; justify-content: space-between; gap: 10px; margin-bottom: 17px; }
+    .card-title span { color: var(--cyan); font-size: 10px; }
+    .chart { height: 140px; display: flex; align-items: end; gap: 8px; border-bottom: 1px solid rgba(255,255,255,.1); padding: 0 5px 12px; }
+    .chart i { flex: 1; min-width: 8px; border-radius: 4px 4px 1px 1px; background: linear-gradient(to top, var(--blue), var(--cyan)); opacity: .82; }
+    .appointment { display: grid; grid-template-columns: 9px 1fr auto; gap: 9px; align-items: center; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.07); font-size: 11px; color: #a9bfd4; }
+    .appointment i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+    .appointment b { color: #eef7ff; }
+    .feed-card { display: grid; grid-template-columns: 38px 1fr; gap: 11px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.07); }
+    .feed-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #2e79ff, #20d9ee); }
+    .feed-card strong { font-size: 12px; }
+    .feed-card p { margin: 4px 0; color: #92abc3; font-size: 11px; line-height: 1.45; }
+    .feed-meta { color: var(--cyan); font-size: 9px; }
+    .market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .market-card { background: rgba(255,255,255,.045); border: 1px solid rgba(171,211,252,.11); border-radius: 14px; overflow: hidden; }
+    .market-visual { height: 112px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(46,121,255,.35), rgba(32,217,238,.08)); }
+    .market-visual svg { width: 58px; height: 58px; stroke: var(--cyan-soft); fill: none; stroke-width: 1.2; }
+    .market-info { padding: 14px; }
+    .market-info small { color: var(--cyan); font-size: 9px; }
+    .market-info strong { display: block; font-size: 12px; margin: 5px 0; }
+    .market-info span { color: #91a9c1; font-size: 10px; }
+    .client-list { display: grid; gap: 9px; }
+    .client-row { display: grid; grid-template-columns: 38px 1fr auto; gap: 11px; align-items: center; padding: 12px; border: 1px solid rgba(171,211,252,.09); background: rgba(255,255,255,.035); border-radius: 12px; }
+    .client-row strong { display: block; font-size: 12px; }
+    .client-row small { color: #88a3bc; }
+    .client-tag { padding: 5px 8px; border-radius: 6px; background: rgba(32,217,238,.1); color: var(--cyan); font-size: 9px; }
+    .tour-hint { display: flex; align-items: center; gap: 10px; color: #8fa8c0; font-size: 12px; margin-top: 16px; }
+    .tour-hint::before { content: ""; width: 24px; height: 1px; background: var(--cyan); }
+    .tour-progress { height: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .tour-progress i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); transform-origin: left; animation: tourProgress 6s linear both; }
+    .showcase.is-paused .tour-progress i { animation-play-state: paused; }
+    @keyframes tourProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    .mockup-reel { padding-top: 34px; }
+    .mockup-reel-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 34px; }
+    .mockup-reel-head h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.08; max-width: 640px; }
+    .mockup-reel-head p { color: var(--muted); max-width: 440px; margin: 0; }
+    .device-reel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: start; }
+    .mini-phone {
+      position: relative;
+      min-width: 0;
+      aspect-ratio: 71.5 / 149.6;
+      padding: 8px;
+      border: 1px solid rgba(190, 222, 255, .22);
+      border-radius: 28px;
+      background: linear-gradient(145deg, #526b85, #07152a 16%, #020916 84%, #526b85);
+      box-shadow: 0 24px 55px rgba(0, 5, 18, .34);
+      animation: mockupFloat 4.8s cubic-bezier(.45,.05,.28,1) infinite;
+      overflow: hidden;
+    }
+    .mini-phone::after {
+      content: "";
+      position: absolute;
+      inset: -35% auto -35% -55%;
+      width: 30%;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      transform: rotate(18deg);
+      animation: miniSweep 6.2s ease-in-out infinite;
+    }
+    .mini-phone:nth-child(2) { margin-top: 42px; animation-delay: -.9s; }
+    .mini-phone:nth-child(3) { margin-top: 12px; animation-delay: -1.8s; }
+    .mini-phone:nth-child(4) { margin-top: 54px; animation-delay: -2.7s; }
+    .mini-screen { width: 100%; height: 100%; min-height: 0; padding: 21px 15px; overflow: hidden; border-radius: 21px; background: linear-gradient(160deg, #0d3563, #06182f 70%); }
+    .mini-notch { width: 48px; height: 13px; background: #020812; border-radius: 20px; margin: -11px auto 18px; }
+    .mini-kicker { color: #89a6c2; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+    .mini-screen h3 { font-size: 17px; margin: 6px 0 17px; }
+    .mini-summary { border-radius: 13px; padding: 14px; background: linear-gradient(130deg, #216ff0, #19cce7); color: #03172b; }
+    .mini-summary small { font-size: 9px; font-weight: 700; }
+    .mini-summary strong { display: block; font: 800 20px "Manrope"; }
+    .mini-line, .mini-post, .mini-offer { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.045); border-radius: 10px; margin-top: 9px; }
+    .mini-line { display: grid; grid-template-columns: 7px 1fr auto; align-items: center; gap: 8px; padding: 10px; font-size: 9px; color: #abc0d4; }
+    .mini-line i { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
+    .mini-line b { color: #eff8ff; }
+    .mini-post { padding: 11px; }
+    .mini-post b, .mini-offer b { display: block; font-size: 10px; }
+    .mini-post span, .mini-offer span { display: block; color: #8ea8c2; font-size: 8px; margin-top: 4px; }
+    .mini-offer { padding: 12px; background: linear-gradient(135deg, rgba(46,121,255,.18), rgba(32,217,238,.04)); }
+    .mini-offer em { display: block; margin-top: 10px; color: var(--cyan); font-size: 8px; font-style: normal; }
+    .mini-client { display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: center; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .mini-client i { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--cyan)); }
+    .mini-client b { display: block; font-size: 9px; }
+    .mini-client span { display: block; color: #8ea8c2; font-size: 8px; }
+    @keyframes mockupFloat {
+      0%, 100% { transform: translateY(0) rotate(-1.2deg); box-shadow: 0 24px 55px rgba(0, 5, 18, .34); }
+      50% { transform: translateY(-18px) rotate(1.2deg); box-shadow: 0 36px 74px rgba(12, 154, 235, .24); }
+    }
+    @keyframes miniSweep {
+      0%, 58% { left: -55%; opacity: 0; }
+      68% { opacity: .9; }
+      84%, 100% { left: 130%; opacity: 0; }
+    }
+
+    .workflow { padding-top: 100px; }
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      background: rgba(4, 18, 38, .2);
+    }
+    .workflow-card {
+      position: relative;
+      min-height: 244px;
+      padding: 29px 27px 31px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .workflow-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan), transparent 75%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .55s cubic-bezier(.2,.8,.2,1);
+    }
+    .workflow-card:hover::before, .workflow-card:focus-within::before { transform: scaleX(1); }
+    .workflow-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 34px;
+      color: var(--cyan);
+      border: 1px solid rgba(32,217,238,.28);
+      border-radius: 12px;
+      background: rgba(32,217,238,.07);
+      animation: iconPulse 4s ease-in-out infinite;
+    }
+    .workflow-card:nth-child(2) .workflow-icon, .workflow-card:nth-child(5) .workflow-icon { animation-delay: -.8s; }
+    .workflow-card:nth-child(3) .workflow-icon, .workflow-card:nth-child(6) .workflow-icon { animation-delay: -1.6s; }
+    .workflow-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+    .workflow-card h3 { font-size: 21px; margin-bottom: 10px; }
+    .workflow-card p { color: var(--muted); margin: 0; font-size: 14px; line-height: 1.65; }
+    @keyframes iconPulse {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 0 0 rgba(32,217,238,0); }
+      50% { transform: translateY(-5px); box-shadow: 0 0 0 8px rgba(32,217,238,.045); }
+    }
+
+    .operating-model { padding-top: 104px; }
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-block: 1px solid var(--line);
+    }
+    .journey-step { position: relative; padding: 31px 24px 34px 0; min-height: 210px; }
+    .journey-step:not(:last-child) { border-right: 1px solid var(--line); margin-right: 24px; }
+    .journey-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -10px;
+      top: 28px;
+      color: var(--cyan);
+      background: var(--bg-deep);
+      padding: 0 4px;
+      font-weight: 800;
+    }
+    .journey-step small { display: block; color: var(--cyan); font: 800 11px "Manrope", sans-serif; letter-spacing: .08em; margin-bottom: 35px; }
+    .journey-step h3 { font-size: 19px; margin-bottom: 9px; }
+    .journey-step p { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0; }
+
+    .detail-section { background: rgba(4, 16, 34, .38); border-block: 1px solid rgba(151, 200, 251, .1); }
+    .detail-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(48px, 8vw, 110px); align-items: start; }
+    .detail-intro { position: sticky; top: 32px; }
+    .detail-intro h2 { font-size: clamp(36px, 4.4vw, 58px); line-height: 1.06; margin-bottom: 20px; }
+    .detail-intro p { color: var(--muted); font-size: 16px; margin: 0; }
+    .detail-list { border-top: 1px solid var(--line); }
+    .detail-item { display: grid; grid-template-columns: 48px 1fr; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+    .detail-index { color: var(--cyan); font: 800 12px "Manrope", sans-serif; padding-top: 4px; }
+    .detail-item h3 { font-size: 21px; margin-bottom: 8px; }
+    .detail-item p { color: var(--muted); font-size: 14px; margin: 0; max-width: 600px; }
+
+    .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(44px, 8vw, 106px); align-items: start; }
+    .faq-layout > h2 { font-size: clamp(38px, 4.8vw, 62px); line-height: 1.04; }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary { list-style: none; cursor: pointer; padding: 24px 46px 24px 0; font: 700 17px "Manrope", sans-serif; position: relative; }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after { content: "+"; position: absolute; right: 4px; top: 19px; color: var(--cyan); font: 500 28px/1 "DM Sans", sans-serif; transition: transform .25s ease; }
+    .faq-list details[open] summary::after { transform: rotate(45deg); }
+    .faq-list details p { color: var(--muted); margin: -4px 46px 25px 0; font-size: 15px; }
+
+    .audience { background: rgba(4, 16, 34, .38); border-block: 1px solid rgba(151, 200, 251, .1); }
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); }
+    .audience-card { background: var(--bg-deep); padding: 34px 30px 39px; min-height: 280px; }
+    .audience-card small { color: var(--cyan); font-weight: 800; font-size: 12px; letter-spacing: .05em; }
+    .audience-card h3 { font-size: 25px; margin: 32px 0 11px; }
+    .audience-card p { color: var(--muted); font-size: 15px; margin: 0; }
+
+    .waitlist {
+      padding: 90px 0 110px;
+    }
+    .waitlist-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(42px, 7vw, 82px);
+      border-radius: 34px 8px 34px 8px;
+      border: 1px solid rgba(66, 210, 241, .25);
+      background: linear-gradient(135deg, #0b3870, #071f40 62%, #05152d);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .waitlist-panel::after { content: ""; position: absolute; width: 300px; height: 300px; right: -140px; bottom: -180px; border-radius: 50%; border: 65px solid rgba(32,217,238,.07); }
+    .waitlist-panel h2 { font-size: clamp(38px, 5.3vw, 66px); line-height: 1.04; max-width: 820px; margin: 0 auto 20px; }
+    .waitlist-panel p { max-width: 650px; margin: 0 auto 31px; color: var(--muted); font-size: 17px; }
+    .waitlist-form { display: grid; grid-template-columns: minmax(0, 390px) auto; justify-content: center; gap: 10px; position: relative; z-index: 2; }
+    .waitlist-form input { min-width: 0; min-height: 54px; border-radius: 10px; border: 1px solid rgba(187, 222, 255, .24); background: rgba(3, 18, 39, .72); color: var(--text); padding: 0 17px; outline: none; }
+    .waitlist-form input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(32,217,238,.12); }
+    .waitlist-form button { border: 0; cursor: pointer; }
+    .form-note { min-height: 25px; margin-top: 13px !important; font-size: 13px !important; color: #a7bbcf !important; }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0 46px; color: #8da4bd; font-size: 13px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-mark { color: var(--silver); font-weight: 700; }
+    .footer-mark span { color: var(--cyan); }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 48px; }
+      .hero-copy { text-align: center; }
+      .eyebrow { justify-content: center; }
+      .hero-copy > p { margin-inline: auto; }
+      .actions { justify-content: center; }
+      .fine { text-align: center; }
+      .product-stage { min-height: 720px; }
+      .trust-inner { grid-template-columns: 1fr 1fr; padding-block: 27px; }
+      .section-head { grid-template-columns: 1fr; gap: 20px; }
+      .platform-grid { grid-template-columns: 1fr; }
+      .tour-intro { grid-template-columns: 1fr; gap: 18px; }
+      .tour-panel { grid-template-columns: 150px 1fr; }
+      .demo-main { padding: 26px 22px; }
+      .device-reel { grid-template-columns: repeat(2, 1fr); }
+      .mini-phone:nth-child(even) { margin-top: 36px; }
+      .mini-phone:nth-child(odd) { margin-top: 0; }
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+      .journey { grid-template-columns: repeat(2, 1fr); border-bottom: 0; }
+      .journey-step { border-bottom: 1px solid var(--line); }
+      .journey-step:not(:last-child) { margin-right: 0; padding-right: 24px; }
+      .journey-step:nth-child(even) { border-right: 0; padding-left: 24px; }
+      .journey-step:nth-child(even)::after, .journey-step:nth-child(4)::after { display: none; }
+      .journey-step:last-child { grid-column: 1 / -1; }
+      .detail-layout, .faq-layout { grid-template-columns: 1fr; }
+      .detail-intro { position: static; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .audience-card { min-height: auto; }
+    }
+
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .nav { min-height: 76px; gap: 10px; }
+      .brand { width: 112px; height: 41px; }
+      .nav-links { gap: 8px; }
+      .nav-cta { font-size: 12px; padding: 8px 10px; }
+      .language-switcher { padding: 3px; }
+      .language-switcher button { min-width: 27px; padding-inline: 5px; }
+      .hero { min-height: 0; padding: 48px 0 78px; }
+      .hero-copy > p { font-size: 16px; }
+      .actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      .product-stage { min-height: 610px; margin-top: 16px; }
+      .phone { width: min(270px, 78vw); border-radius: 36px; }
+      .phone::after { border-radius: 26px; }
+      .screen { border-radius: 25px; padding: 20px 15px; }
+      .island { margin-top: -11px; margin-bottom: 17px; }
+      .greeting { margin: 15px 0 12px; }
+      .balance { padding: 14px; }
+      .metrics { margin: 9px 0 13px; }
+      .metric { padding: 9px; }
+      .task { padding: 8px 0; }
+      .phone-back { width: 178px; opacity: .55; }
+      .phone-back.left { animation-name: backPhoneLeftMobile; }
+      .phone-back.right { animation-name: backPhoneRightMobile; }
+      .float-card { min-width: 132px; padding: 11px 12px; font-size: 10px; }
+      .float-card strong { font-size: 12px; }
+      .float-card.one { left: -2px; top: 90px; }
+      .float-card.two { right: -2px; bottom: 70px; }
+      .trust-inner { grid-template-columns: 1fr; gap: 16px; }
+      .trust p { max-width: none; margin: 0 0 7px; }
+      section { padding: 82px 0; }
+      .section-head { margin-bottom: 38px; }
+      .feature { min-height: 250px; padding: 25px; }
+      .feature h3 { margin-top: 48px; }
+      .product-tour { padding-top: 86px; }
+      .tour-tabs { display: grid; grid-template-columns: 1fr 1fr; }
+      .tour-tab { width: 100%; padding-inline: 9px; }
+      .mockup-reel-head { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .device-reel { gap: 10px; }
+      .mini-phone { border-radius: 22px; padding: 6px; }
+      .mini-phone:nth-child(even) { margin-top: 24px; }
+      .mini-screen { min-height: 0; padding: 17px 10px; border-radius: 17px; }
+      .mini-screen h3 { font-size: 14px; }
+      .mini-line { grid-template-columns: 6px 1fr; }
+      .mini-line b { grid-column: 2; }
+      .mini-summary strong { font-size: 17px; }
+      .showcase { min-height: 620px; border-radius: 8px 24px 8px 24px; }
+      .showcase-bar { min-height: 48px; }
+      .tour-panel, .tour-panel.active { grid-template-columns: 1fr; min-height: 570px; }
+      .demo-side { display: none; }
+      .demo-main { padding: 22px 16px 26px; }
+      .demo-head { align-items: center; }
+      .demo-action { display: none; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .stat-box:last-child { grid-column: 1 / -1; min-height: 80px; }
+      .demo-grid { grid-template-columns: 1fr; }
+      .demo-card { min-height: 190px; }
+      .demo-grid .demo-card:last-child { display: none; }
+      .market-grid { grid-template-columns: 1fr 1fr; }
+      .market-card:last-child { grid-column: 1 / -1; }
+      .client-row { grid-template-columns: 34px 1fr; }
+      .client-tag { grid-column: 2; justify-self: start; }
+      .workflow { padding-top: 72px; }
+      .workflow-grid { grid-template-columns: 1fr; }
+      .workflow-card { min-height: 0; padding: 25px 23px 27px; }
+      .journey { grid-template-columns: 1fr; }
+      .journey-step, .journey-step:nth-child(even), .journey-step:not(:last-child) { grid-column: auto; border-right: 0; margin: 0; padding: 24px 4px 25px; min-height: 0; }
+      .journey-step:not(:last-child)::after { content: "↓"; display: block; right: 5px; top: auto; bottom: -13px; }
+      .journey-step small { margin-bottom: 15px; }
+      .detail-item { grid-template-columns: 36px 1fr; gap: 8px; }
+      .faq-list summary { font-size: 16px; }
+      .workflow-icon { margin-bottom: 24px; }
+      .waitlist-form { grid-template-columns: 1fr; }
+      .waitlist-panel { padding: 44px 20px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      @keyframes backPhoneLeftMobile {
+        0%, 100% { transform: translate(-82px, 23px) rotate(-9deg); }
+        50% { transform: translate(-91px, 15px) rotate(-11deg); }
+      }
+      @keyframes backPhoneRightMobile {
+        0%, 100% { transform: translate(82px, 17px) rotate(10deg); }
+        50% { transform: translate(91px, 10px) rotate(12deg); }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell nav" aria-label="Main navigation">
+    <img class="brand" src="data:image/jpeg;base64,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" alt="iKlinq" />
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#plataforma">Platform</a>
+      <a href="#como-funciona">How it works</a>
+      <a href="#para-quem">Who it’s for</a>
+      <div class="language-switcher" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
+        <button type="button" data-lang="pt" aria-pressed="false" aria-label="Português">PT</button>
+        <button type="button" data-lang="es" aria-pressed="false" aria-label="Español">ES</button>
+      </div>
+      <a class="nav-cta" href="#lista">Early access</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Built for the cleaning industry</div>
+        <h1>Your business.<br />Your connections.<br /><span>All in one place.</span></h1>
+        <p>Business management, a professional network, opportunities, and clients—together in one ecosystem built to transform the day-to-day work of cleaning professionals.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#lista">Get early access <span class="arrow">→</span></a>
+          <a class="btn btn-secondary" href="#plataforma">Explore the platform</a>
+        </div>
+        <p class="fine">In development • Launching first in California</p>
+      </div>
+
+      <div class="product-stage" aria-label="Conceptual collection of iKlinq app screens">
+        <div class="phone-back left" aria-hidden="true">
+          <div class="back-screen">
+            <span class="back-label">Community</span>
+            <h4>Connections that make you stronger</h4>
+            <div class="community-person"><span class="person-dot"></span><span class="person-lines"><i></i><i></i></span></div>
+            <div class="community-person"><span class="person-dot"></span><span class="person-lines"><i></i><i></i></span></div>
+            <div class="community-person"><span class="person-dot"></span><span class="person-lines"><i></i><i></i></span></div>
+          </div>
+        </div>
+        <div class="phone-back right" aria-hidden="true">
+          <div class="back-screen">
+            <span class="back-label">Marketplace</span>
+            <h4>Opportunities near you</h4>
+            <div class="market-tile"><i></i><i></i><em>View opportunity →</em></div>
+            <div class="market-tile"><i></i><i></i><em>View opportunity →</em></div>
+            <div class="market-tile"><i></i><i></i><em>View opportunity →</em></div>
+          </div>
+        </div>
+        <div class="float-card one"><span><i class="pulse"></i>Next job</span><strong>Today, 2:30 PM</strong></div>
+        <div class="phone" aria-hidden="true">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="screen-head"><span>Overview</span><div class="avatar">iK</div></div>
+            <div class="greeting"><small>Good morning,</small><strong>Your business in motion</strong></div>
+            <div class="balance"><small>Monthly revenue</small><b>$4,860</b></div>
+            <div class="metrics"><div class="metric"><small>Jobs</small><strong>28</strong></div><div class="metric"><small>Clients</small><strong>19</strong></div></div>
+            <div class="section-label">Today’s schedule</div>
+            <div class="task"><i></i><span>Residential cleaning</span><b>9:00</b></div>
+            <div class="task"><i></i><span>Weekly maintenance</span><b>2:30</b></div>
+            <div class="task"><i></i><span>New quote</span><b>5:00</b></div>
+          </div>
+        </div>
+        <div class="float-card two"><span>New connections</span><strong>+12 this week</strong></div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="shell trust-inner">
+        <p>Everything you need to work, grow, and connect.</p>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></svg>Simplified management</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 19c.5-4 2.4-6 5.5-6s5 2 5.5 6m.5-4.5c3.7-.8 6.2.8 6.5 4.5"/></svg>Professional network</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m-5 5h2"/></svg>New opportunities</div>
+      </div>
+    </div>
+
+    <section class="shell product-tour" aria-labelledby="tour-title">
+      <div class="tour-intro">
+        <h2 id="tour-title">See the workday come to life.</h2>
+        <p class="tour-copy">Explore a conceptual product preview and see how management, community, marketplace, and client tools come together in one seamless experience.</p>
+      </div>
+
+      <div class="tour-tabs" role="group" aria-label="Choose a product screen">
+        <button class="tour-tab" type="button" data-screen="gestao" aria-pressed="true">Management</button>
+        <button class="tour-tab" type="button" data-screen="comunidade" aria-pressed="false">Community</button>
+        <button class="tour-tab" type="button" data-screen="marketplace" aria-pressed="false">Marketplace</button>
+        <button class="tour-tab" type="button" data-screen="clientes" aria-pressed="false">Clients</button>
+      </div>
+
+      <div class="showcase" aria-live="polite">
+        <div class="showcase-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>iKlinq concept prototype</span><span class="screen-counter">01 / 04</span></div>
+        <div class="tour-progress" aria-hidden="true"><i></i></div>
+
+        <div class="tour-panel active" data-panel="gestao">
+          <aside class="demo-side" aria-hidden="true"><strong>iKlinq<span style="color:var(--cyan)">.</span></strong><div class="side-item active"><i class="side-icon"></i>Overview</div><div class="side-item"><i class="side-icon"></i>Schedule</div><div class="side-item"><i class="side-icon"></i>Jobs</div><div class="side-item"><i class="side-icon"></i>Finances</div></aside>
+          <div class="demo-main">
+            <div class="demo-head"><div><small>Management dashboard</small><h3>Your business at a glance.</h3></div><span class="demo-action">New job +</span></div>
+            <div class="stat-row"><div class="stat-box"><small>Monthly revenue</small><strong>$4,860</strong><em>Consolidated view</em></div><div class="stat-box"><small>Jobs</small><strong>28</strong><em>Organized schedule</em></div><div class="stat-box"><small>Clients</small><strong>19</strong><em>Active relationships</em></div></div>
+            <div class="demo-grid"><div class="demo-card"><div class="card-title">Monthly performance <span>Last 6 months</span></div><div class="chart" aria-hidden="true"><i style="height:32%"></i><i style="height:44%"></i><i style="height:38%"></i><i style="height:63%"></i><i style="height:78%"></i><i style="height:92%"></i></div></div><div class="demo-card"><div class="card-title">Upcoming jobs <span>View schedule</span></div><div class="appointment"><i></i><span>Residential cleaning</span><b>9:00</b></div><div class="appointment"><i></i><span>Weekly maintenance</span><b>2:30</b></div><div class="appointment"><i></i><span>New quote</span><b>5:00</b></div></div></div>
+          </div>
+        </div>
+
+        <div class="tour-panel" data-panel="comunidade">
+          <aside class="demo-side" aria-hidden="true"><strong>iKlinq<span style="color:var(--cyan)">.</span></strong><div class="side-item"><i class="side-icon"></i>Overview</div><div class="side-item active"><i class="side-icon"></i>Community</div><div class="side-item"><i class="side-icon"></i>Connections</div><div class="side-item"><i class="side-icon"></i>Messages</div></aside>
+          <div class="demo-main">
+            <div class="demo-head"><div><small>Professional network</small><h3>Knowledge that moves everyone forward.</h3></div><span class="demo-action">Create post +</span></div>
+            <div class="demo-grid"><div class="demo-card"><div class="card-title">Community conversations <span>Latest</span></div><div class="feed-card"><span class="feed-avatar"></span><div><strong>How do you organize a recurring schedule?</strong><p>A practical conversation about workflows, service, and sustainable growth.</p><span class="feed-meta">12 replies · now</span></div></div><div class="feed-card"><span class="feed-avatar"></span><div><strong>Best practices for new quotes</strong><p>Professionals share experience that helps other businesses grow.</p><span class="feed-meta">8 replies · today</span></div></div></div><div class="demo-card"><div class="card-title">New connections <span>View all</span></div><div class="community-person"><span class="person-dot"></span><span class="person-lines"><i></i><i></i></span></div><div class="community-person"><span class="person-dot"></span><span class="person-lines"><i></i><i></i></span></div><div class="community-person"><span class="person-dot"></span><span class="person-lines"><i></i><i></i></span></div></div></div>
+          </div>
+        </div>
+
+        <div class="tour-panel" data-panel="marketplace">
+          <aside class="demo-side" aria-hidden="true"><strong>iKlinq<span style="color:var(--cyan)">.</span></strong><div class="side-item"><i class="side-icon"></i>Overview</div><div class="side-item active"><i class="side-icon"></i>Marketplace</div><div class="side-item"><i class="side-icon"></i>Opportunities</div><div class="side-item"><i class="side-icon"></i>Suppliers</div></aside>
+          <div class="demo-main">
+            <div class="demo-head"><div><small>Specialized marketplace</small><h3>What your business needs.</h3></div><span class="demo-action">Explore categories</span></div>
+            <div class="market-grid"><article class="market-card"><div class="market-visual"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 18h24v34H20zM25 18v-5h14v5M26 30h12M26 37h12"/></svg></div><div class="market-info"><small>OPPORTUNITIES</small><strong>New jobs in your area</strong><span>Find demand aligned with your profile.</span></div></article><article class="market-card"><div class="market-visual"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 24h36v27H14zM20 24l5-11h14l5 11M25 35h14"/></svg></div><div class="market-info"><small>SUPPLIERS</small><strong>Everyday business solutions</strong><span>Compare options made for the industry.</span></div></article><article class="market-card"><div class="market-visual"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="23" r="10"/><path d="M15 52c2-13 8-19 17-19s15 6 17 19"/></svg></div><div class="market-info"><small>PARTNERSHIPS</small><strong>Find the right collaborators</strong><span>Build relevant professional connections.</span></div></article></div>
+          </div>
+        </div>
+
+        <div class="tour-panel" data-panel="clientes">
+          <aside class="demo-side" aria-hidden="true"><strong>iKlinq<span style="color:var(--cyan)">.</span></strong><div class="side-item"><i class="side-icon"></i>Overview</div><div class="side-item active"><i class="side-icon"></i>Clients</div><div class="side-item"><i class="side-icon"></i>Bookings</div><div class="side-item"><i class="side-icon"></i>Quotes</div></aside>
+          <div class="demo-main">
+            <div class="demo-head"><div><small>Client relationships</small><h3>Every client connection in one place.</h3></div><span class="demo-action">Add client +</span></div>
+            <div class="stat-row"><div class="stat-box"><small>Requests</small><strong>08</strong><em>Awaiting response</em></div><div class="stat-box"><small>Bookings</small><strong>12</strong><em>Next 7 days</em></div><div class="stat-box"><small>Ratings</small><strong>4.9</strong><em>Recognized service</em></div></div>
+            <div class="demo-card"><div class="card-title">Recent client activity <span>View clients</span></div><div class="client-list"><div class="client-row"><span class="feed-avatar"></span><span><strong>Quote request</strong><small>Residential cleaning</small></span><span class="client-tag">New contact</span></div><div class="client-row"><span class="feed-avatar"></span><span><strong>Scheduled job</strong><small>Weekly maintenance</small></span><span class="client-tag">Confirmed</span></div><div class="client-row"><span class="feed-avatar"></span><span><strong>Follow-up requested</strong><small>Conversation in progress</small></span><span class="client-tag">Reply</span></div></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="tour-hint">Choose an area above to explore the product concept. The preview advances automatically and pauses while you interact.</p>
+    </section>
+
+    <section class="shell mockup-reel" aria-labelledby="mockup-title">
+      <div class="mockup-reel-head">
+        <h2 id="mockup-title">One app. Every part of the workday.</h2>
+        <p>Follow the modules from the first appointment to the next opportunity—each screen designed to keep the business moving.</p>
+      </div>
+      <div class="device-reel">
+        <article class="mini-phone"><div class="mini-screen"><div class="mini-notch"></div><span class="mini-kicker">Management</span><h3>Run the day</h3><div class="mini-summary"><small>Today’s revenue</small><strong>$640</strong></div><div class="mini-line"><i></i><span>Residential cleaning</span><b>9:00</b></div><div class="mini-line"><i></i><span>Weekly maintenance</span><b>2:30</b></div><div class="mini-line"><i></i><span>New quote</span><b>5:00</b></div></div></article>
+        <article class="mini-phone"><div class="mini-screen"><div class="mini-notch"></div><span class="mini-kicker">Community</span><h3>Learn together</h3><div class="mini-post"><b>Pricing recurring services</b><span>14 replies · active now</span></div><div class="mini-post"><b>Building a reliable team</b><span>9 replies · today</span></div><div class="mini-post"><b>Share your best workflow</b><span>Join the conversation</span></div></div></article>
+        <article class="mini-phone"><div class="mini-screen"><div class="mini-notch"></div><span class="mini-kicker">Marketplace</span><h3>Find what’s next</h3><div class="mini-offer"><b>New local opportunity</b><span>Recurring residential service</span><em>View details →</em></div><div class="mini-offer"><b>Supplier partnership</b><span>Solutions for growing teams</span><em>Explore →</em></div><div class="mini-offer"><b>Industry resources</b><span>Tools selected for cleaning businesses</span><em>Discover →</em></div></div></article>
+        <article class="mini-phone"><div class="mini-screen"><div class="mini-notch"></div><span class="mini-kicker">Clients</span><h3>Stay connected</h3><div class="mini-client"><i></i><span><b>Quote request</b><span>New contact</span></span></div><div class="mini-client"><i></i><span><b>Job confirmed</b><span>Tomorrow · 10:00</span></span></div><div class="mini-client"><i></i><span><b>New review</b><span>5 stars</span></span></div><div class="mini-client"><i></i><span><b>Follow-up</b><span>Ready to reply</span></span></div></div></article>
+      </div>
+    </section>
+
+    <section id="plataforma" class="shell">
+      <div class="section-head">
+        <h2>More than an app.<br />An ecosystem.</h2>
+        <p>iKlinq brings together the parts that are currently disconnected: operations, professional relationships, hiring, and the client experience.</p>
+      </div>
+      <div class="platform-grid">
+        <article class="feature">
+          <span class="feature-num">01</span>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><rect x="15" y="23" width="70" height="57" rx="4"/><path d="M28 63V48m15 15V35m15 28V51m15 12V41"/></svg>
+          <h3>Manage with clarity</h3>
+          <p>Organize your schedule, clients, jobs, team, and finances without juggling scattered tools.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-num">02</span>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="37" cy="38" r="13"/><circle cx="69" cy="42" r="10"/><path d="M14 78c2-18 11-27 23-27s21 9 23 27m1-22c14-3 24 4 25 22"/></svg>
+          <h3>Build your network</h3>
+          <p>Share experience, strengthen your reputation, and find a community that understands your work.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-num">03</span>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M19 30h62v50H19zM34 30v-8h32v8M43 55h14m-7-7v14"/></svg>
+          <h3>Find opportunities</h3>
+          <p>Access jobs, partnerships, suppliers, and resources designed for the cleaning industry.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-num">04</span>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><rect x="19" y="20" width="62" height="62" rx="5"/><path d="M19 39h62M34 14v13m32-13v13M33 52h8m10 0h8m10 0h7M33 66h8m10 0h8"/></svg>
+          <h3>Connect with clients</h3>
+          <p>Make discovery, booking, and hiring simpler through a more trustworthy experience.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell workflow" aria-labelledby="workflow-title">
+      <div class="section-head">
+        <h2 id="workflow-title">From the first request to the next stage of growth.</h2>
+        <p>iKlinq is being designed around the complete operating rhythm of a cleaning business—not just one isolated task.</p>
+      </div>
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 3V5Z"/><path d="M8 9h8M8 13h5"/></svg></span>
+          <h3>Requests and quotes</h3>
+          <p>Keep new inquiries, service details, quotes, and follow-ups organized in one clear flow.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-14 4h3m3 0h4m-10 3h5"/></svg></span>
+          <h3>Scheduling and recurring work</h3>
+          <p>Plan one-time and recurring services while keeping the day, team, and client commitments aligned.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c.5-4 2.4-6 5.5-6s5 2 5.5 6m.5-4.5c3.7-.8 6.2.8 6.5 4.5"/></svg></span>
+          <h3>Team coordination</h3>
+          <p>Bring assignments, job context, and daily operations together as a company grows beyond one person.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h8m-8 4h8m-8 4h5"/></svg></span>
+          <h3>Client relationships</h3>
+          <p>See requests, bookings, service history, and conversations with the context needed to deliver a consistent experience.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9L12 3Z"/></svg></span>
+          <h3>Profile and reputation</h3>
+          <p>Present services professionally, build credibility, and learn alongside people who understand the industry.</p>
+        </article>
+        <article class="workflow-card">
+          <span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM7 7V4h10v3m-6 5h2"/></svg></span>
+          <h3>Marketplace and opportunity</h3>
+          <p>Discover jobs, partnerships, suppliers, and practical resources within the same professional ecosystem.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="shell operating-model" aria-labelledby="journey-title">
+      <div class="section-head">
+        <h2 id="journey-title">One connected journey, from inquiry to growth.</h2>
+        <p>Instead of moving the same information between messages, calendars, notes, and separate tools, iKlinq is designed to keep every stage connected.</p>
+      </div>
+      <div class="journey">
+        <article class="journey-step"><small>STEP 01</small><h3>Receive a request</h3><p>Capture the service need, client context, location, and preferred timing in one starting point.</p></article>
+        <article class="journey-step"><small>STEP 02</small><h3>Build the quote</h3><p>Keep scope, pricing context, and follow-up connected to the original conversation.</p></article>
+        <article class="journey-step"><small>STEP 03</small><h3>Plan the work</h3><p>Turn approved services into scheduled work, including recurring routines and team assignments.</p></article>
+        <article class="journey-step"><small>STEP 04</small><h3>Deliver with context</h3><p>Bring job details, client history, and daily priorities together before the work begins.</p></article>
+        <article class="journey-step"><small>STEP 05</small><h3>Strengthen the relationship</h3><p>Keep follow-up, reputation, repeat work, and the next opportunity within reach.</p></article>
+      </div>
+    </section>
+
+    <section class="detail-section" aria-labelledby="detail-title">
+      <div class="shell detail-layout">
+        <div class="detail-intro">
+          <h2 id="detail-title">Built around the realities of the work.</h2>
+          <p>Every module is being shaped for the details that matter in a service business: time, trust, context, and consistent client relationships.</p>
+        </div>
+        <div class="detail-list">
+          <article class="detail-item"><span class="detail-index">01</span><div><h3>A clear operating view</h3><p>See requests, confirmed work, recurring commitments, and client activity without rebuilding the day from scattered conversations.</p></div></article>
+          <article class="detail-item"><span class="detail-index">02</span><div><h3>Context that follows the job</h3><p>Keep service details, notes, scheduling information, and relationship history connected as work moves forward.</p></div></article>
+          <article class="detail-item"><span class="detail-index">03</span><div><h3>Structure for solo professionals and teams</h3><p>Start with a simpler personal workflow, then coordinate assignments and shared operations as the business grows.</p></div></article>
+          <article class="detail-item"><span class="detail-index">04</span><div><h3>A professional presence</h3><p>Bring services, experience, reputation, and client-facing information into a profile designed for the cleaning industry.</p></div></article>
+          <article class="detail-item"><span class="detail-index">05</span><div><h3>Industry knowledge in the same place</h3><p>Learn from practical conversations, build relevant connections, and discover resources without leaving the professional ecosystem.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="para-quem" class="audience">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Built for the people who keep the industry moving.</h2>
+          <p>From independent professionals to growing companies, every experience starts with a real industry need.</p>
+        </div>
+        <div class="audience-grid">
+          <article class="audience-card"><small>PROFESSIONALS</small><h3>More control, less guesswork.</h3><p>Centralize your day-to-day work, showcase your services, and find new ways to grow.</p></article>
+          <article class="audience-card"><small>BUSINESSES</small><h3>Operations ready to scale.</h3><p>Manage teams, clients, and opportunities with a clearer view of your business.</p></article>
+          <article class="audience-card"><small>CLIENTS</small><h3>A simpler way to hire.</h3><p>Discover cleaning professionals and businesses through a practical, trustworthy experience.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell faq" aria-labelledby="faq-title">
+      <div class="faq-layout">
+        <h2 id="faq-title">Questions, answered clearly.</h2>
+        <div class="faq-list">
+          <details open><summary>What exactly is iKlinq?</summary><p>iKlinq is an ecosystem in development for the cleaning industry. It is designed to bring business management, professional networking, marketplace opportunities, and client connections into one experience.</p></details>
+          <details><summary>Who is the platform for?</summary><p>It is being designed for independent cleaning professionals, growing cleaning businesses and teams, and clients looking for a clearer way to discover and connect with service providers.</p></details>
+          <details><summary>What could I manage inside the app?</summary><p>The product concept includes requests, quotes, schedules, recurring work, team coordination, client history, service activity, professional profiles, and an operating overview.</p></details>
+          <details><summary>How are the community and marketplace different?</summary><p>The community is focused on professional knowledge and relationships. The marketplace is designed around practical opportunities such as jobs, partnerships, suppliers, and industry resources.</p></details>
+          <details><summary>Where will iKlinq launch first?</summary><p>The initial launch is planned for California. Availability in additional regions will be shared as the product develops.</p></details>
+          <details><summary>When will early access be available?</summary><p>iKlinq is still in development. The interest list will open before launch, and this page will be updated when registration becomes available.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="lista" class="shell waitlist">
+      <div class="waitlist-panel">
+        <h2>The future of professional cleaning starts here.</h2>
+        <p>Join the interest list for product updates and be the first to know when early access becomes available.</p>
+        <div class="waitlist-form" aria-label="Waitlist status">
+          <div class="btn btn-primary" style="grid-column:1 / -1; cursor:default">Waitlist coming soon <span class="arrow">→</span></div>
+        </div>
+        <p class="form-note">Sign-up will be available here before launch.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner"><div class="footer-mark">iKlinq<span>.</span></div><div>Building new connections for the cleaning industry.</div><div>© 2026 iKlinq</div></div>
+  </footer>
+
+  <script>
+    (function () {
+      document.documentElement.classList.add('motion-ready');
+
+      var translations = {
+        pt: {
+          'Platform': 'Plataforma', 'How it works': 'Como funciona', 'Who it’s for': 'Para quem é', 'Early access': 'Acesso antecipado',
+          'Built for the cleaning industry': 'Criado para o setor de limpeza', 'Your business.': 'Seu negócio.', 'Your connections.': 'Suas conexões.', 'All in one place.': 'Tudo em um só lugar.',
+          'Business management, a professional network, opportunities, and clients—together in one ecosystem built to transform the day-to-day work of cleaning professionals.': 'Gestão de negócios, rede profissional, oportunidades e clientes — tudo em um ecossistema criado para transformar o dia a dia de quem trabalha com limpeza.',
+          'Get early access': 'Quero acesso antecipado', 'Explore the platform': 'Explorar a plataforma', 'In development • Launching first in California': 'Em desenvolvimento • Lançamento inicial na Califórnia',
+          'Community': 'Comunidade', 'Connections that make you stronger': 'Conexões que fortalecem você', 'Marketplace': 'Marketplace', 'Opportunities near you': 'Oportunidades perto de você', 'View opportunity →': 'Ver oportunidade →',
+          'Next job': 'Próximo serviço', 'Today, 2:30 PM': 'Hoje, 14h30', 'Overview': 'Visão geral', 'Good morning,': 'Bom dia,', 'Your business in motion': 'Seu negócio em movimento', 'Monthly revenue': 'Receita mensal', 'Jobs': 'Serviços', 'Clients': 'Clientes', 'Today’s schedule': 'Agenda de hoje', 'Residential cleaning': 'Limpeza residencial', 'Weekly maintenance': 'Manutenção semanal', 'New quote': 'Novo orçamento', 'New connections': 'Novas conexões', '+12 this week': '+12 nesta semana',
+          'Everything you need to work, grow, and connect.': 'Tudo o que você precisa para trabalhar, crescer e se conectar.', 'Simplified management': 'Gestão simplificada', 'Professional network': 'Rede profissional', 'New opportunities': 'Novas oportunidades',
+          'See the workday come to life.': 'Veja a rotina ganhar vida.', 'Explore a conceptual product preview and see how management, community, marketplace, and client tools come together in one seamless experience.': 'Explore uma prévia conceitual do produto e veja como gestão, comunidade, marketplace e ferramentas para clientes se conectam em uma experiência fluida.', 'Management': 'Gestão', 'iKlinq concept prototype': 'Protótipo conceitual iKlinq',
+          'Schedule': 'Agenda', 'Finances': 'Finanças', 'Management dashboard': 'Painel de gestão', 'Your business at a glance.': 'Seu negócio em uma visão.', 'New job +': 'Novo serviço +', 'Consolidated view': 'Visão consolidada', 'Organized schedule': 'Agenda organizada', 'Active relationships': 'Relacionamentos ativos', 'Monthly performance': 'Desempenho mensal', 'Last 6 months': 'Últimos 6 meses', 'Upcoming jobs': 'Próximos serviços', 'View schedule': 'Ver agenda',
+          'Connections': 'Conexões', 'Messages': 'Mensagens', 'Knowledge that moves everyone forward.': 'Conhecimento que faz todos avançarem.', 'Create post +': 'Criar publicação +', 'Community conversations': 'Conversas da comunidade', 'Latest': 'Recentes', 'How do you organize a recurring schedule?': 'Como você organiza uma agenda recorrente?', 'A practical conversation about workflows, service, and sustainable growth.': 'Uma conversa prática sobre processos, atendimento e crescimento sustentável.', '12 replies · now': '12 respostas · agora', 'Best practices for new quotes': 'Boas práticas para novos orçamentos', 'Professionals share experience that helps other businesses grow.': 'Profissionais compartilham experiências que ajudam outros negócios a crescer.', '8 replies · today': '8 respostas · hoje', 'View all': 'Ver tudo',
+          'Specialized marketplace': 'Marketplace especializado', 'What your business needs.': 'O que seu negócio precisa.', 'Explore categories': 'Explorar categorias', 'OPPORTUNITIES': 'OPORTUNIDADES', 'New jobs in your area': 'Novos serviços na sua região', 'Find demand aligned with your profile.': 'Encontre demandas alinhadas ao seu perfil.', 'SUPPLIERS': 'FORNECEDORES', 'Everyday business solutions': 'Soluções para o dia a dia', 'Compare options made for the industry.': 'Compare opções feitas para o setor.', 'PARTNERSHIPS': 'PARCERIAS', 'Find the right collaborators': 'Encontre os parceiros certos', 'Build relevant professional connections.': 'Construa conexões profissionais relevantes.',
+          'Bookings': 'Agendamentos', 'Quotes': 'Orçamentos', 'Client relationships': 'Relacionamento com clientes', 'Every client connection in one place.': 'Todas as conexões com clientes em um só lugar.', 'Add client +': 'Adicionar cliente +', 'Requests': 'Solicitações', 'Awaiting response': 'Aguardando resposta', 'Next 7 days': 'Próximos 7 dias', 'Ratings': 'Avaliações', 'Recognized service': 'Serviço reconhecido', 'Recent client activity': 'Atividade recente dos clientes', 'View clients': 'Ver clientes', 'Quote request': 'Solicitação de orçamento', 'New contact': 'Novo contato', 'Scheduled job': 'Serviço agendado', 'Confirmed': 'Confirmado', 'Follow-up requested': 'Retorno solicitado', 'Conversation in progress': 'Conversa em andamento', 'Reply': 'Responder',
+          'Choose an area above to explore the product concept. The preview advances automatically and pauses while you interact.': 'Escolha uma área acima para explorar o conceito do produto. A prévia avança automaticamente e pausa enquanto você interage.',
+          'One app. Every part of the workday.': 'Um app. Cada parte do dia de trabalho.', 'Follow the modules from the first appointment to the next opportunity—each screen designed to keep the business moving.': 'Acompanhe os módulos do primeiro agendamento à próxima oportunidade — cada tela foi criada para manter o negócio em movimento.', 'Run the day': 'Organize o dia', 'Today’s revenue': 'Receita de hoje', 'Learn together': 'Aprenda em conjunto', 'Pricing recurring services': 'Precificação de serviços recorrentes', '14 replies · active now': '14 respostas · ativo agora', 'Building a reliable team': 'Formando uma equipe confiável', '9 replies · today': '9 respostas · hoje', 'Share your best workflow': 'Compartilhe seu melhor processo', 'Join the conversation': 'Participe da conversa', 'Find what’s next': 'Encontre o próximo passo', 'New local opportunity': 'Nova oportunidade local', 'Recurring residential service': 'Serviço residencial recorrente', 'View details →': 'Ver detalhes →', 'Supplier partnership': 'Parceria com fornecedor', 'Solutions for growing teams': 'Soluções para equipes em crescimento', 'Explore →': 'Explorar →', 'Industry resources': 'Recursos do setor', 'Tools selected for cleaning businesses': 'Ferramentas selecionadas para empresas de limpeza', 'Discover →': 'Descobrir →', 'Stay connected': 'Mantenha-se conectado', 'Job confirmed': 'Serviço confirmado', 'Tomorrow · 10:00': 'Amanhã · 10h00', 'New review': 'Nova avaliação', '5 stars': '5 estrelas', 'Follow-up': 'Acompanhamento', 'Ready to reply': 'Pronto para responder',
+          'More than an app.': 'Mais que um app.', 'An ecosystem.': 'Um ecossistema.', 'iKlinq brings together the parts that are currently disconnected: operations, professional relationships, hiring, and the client experience.': 'A iKlinq reúne o que hoje está desconectado: operações, relacionamentos profissionais, contratação e experiência do cliente.', 'Manage with clarity': 'Gerencie com clareza', 'Organize your schedule, clients, jobs, team, and finances without juggling scattered tools.': 'Organize agenda, clientes, serviços, equipe e finanças sem depender de ferramentas desconectadas.', 'Build your network': 'Fortaleça sua rede', 'Share experience, strengthen your reputation, and find a community that understands your work.': 'Compartilhe experiências, fortaleça sua reputação e encontre uma comunidade que entende seu trabalho.', 'Find opportunities': 'Encontre oportunidades', 'Access jobs, partnerships, suppliers, and resources designed for the cleaning industry.': 'Acesse serviços, parcerias, fornecedores e recursos criados para o setor de limpeza.', 'Connect with clients': 'Conecte-se com clientes', 'Make discovery, booking, and hiring simpler through a more trustworthy experience.': 'Torne a descoberta, o agendamento e a contratação mais simples com uma experiência mais confiável.',
+          'From the first request to the next stage of growth.': 'Do primeiro pedido ao próximo estágio de crescimento.', 'iKlinq is being designed around the complete operating rhythm of a cleaning business—not just one isolated task.': 'A iKlinq está sendo criada em torno de toda a rotina operacional de uma empresa de limpeza — não apenas de uma tarefa isolada.', 'Requests and quotes': 'Solicitações e orçamentos', 'Keep new inquiries, service details, quotes, and follow-ups organized in one clear flow.': 'Mantenha novos contatos, detalhes do serviço, orçamentos e acompanhamentos organizados em um fluxo claro.', 'Scheduling and recurring work': 'Agenda e serviços recorrentes', 'Plan one-time and recurring services while keeping the day, team, and client commitments aligned.': 'Planeje serviços pontuais e recorrentes mantendo o dia, a equipe e os compromissos com clientes alinhados.', 'Team coordination': 'Coordenação de equipe', 'Bring assignments, job context, and daily operations together as a company grows beyond one person.': 'Reúna atribuições, contexto dos serviços e operações diárias conforme a empresa cresce além de uma pessoa.', 'Client relationships': 'Relacionamento com clientes', 'See requests, bookings, service history, and conversations with the context needed to deliver a consistent experience.': 'Veja solicitações, agendamentos, histórico de serviços e conversas com o contexto necessário para oferecer uma experiência consistente.', 'Profile and reputation': 'Perfil e reputação', 'Present services professionally, build credibility, and learn alongside people who understand the industry.': 'Apresente serviços com profissionalismo, construa credibilidade e aprenda com pessoas que entendem o setor.', 'Marketplace and opportunity': 'Marketplace e oportunidades', 'Discover jobs, partnerships, suppliers, and practical resources within the same professional ecosystem.': 'Descubra serviços, parcerias, fornecedores e recursos práticos no mesmo ecossistema profissional.',
+          'One connected journey, from inquiry to growth.': 'Uma jornada conectada, do pedido ao crescimento.', 'Instead of moving the same information between messages, calendars, notes, and separate tools, iKlinq is designed to keep every stage connected.': 'Em vez de mover as mesmas informações entre mensagens, agendas, anotações e ferramentas separadas, a iKlinq foi pensada para manter cada etapa conectada.',
+          'STEP 01': 'ETAPA 01', 'Receive a request': 'Receba uma solicitação', 'Capture the service need, client context, location, and preferred timing in one starting point.': 'Reúna a necessidade do serviço, o contexto do cliente, o local e o horário preferido em um único ponto de partida.', 'STEP 02': 'ETAPA 02', 'Build the quote': 'Monte o orçamento', 'Keep scope, pricing context, and follow-up connected to the original conversation.': 'Mantenha escopo, contexto de preço e acompanhamento ligados à conversa original.', 'STEP 03': 'ETAPA 03', 'Plan the work': 'Planeje o serviço', 'Turn approved services into scheduled work, including recurring routines and team assignments.': 'Transforme serviços aprovados em trabalhos agendados, incluindo rotinas recorrentes e atribuições da equipe.', 'STEP 04': 'ETAPA 04', 'Deliver with context': 'Execute com contexto', 'Bring job details, client history, and daily priorities together before the work begins.': 'Reúna detalhes do serviço, histórico do cliente e prioridades do dia antes do trabalho começar.', 'STEP 05': 'ETAPA 05', 'Strengthen the relationship': 'Fortaleça o relacionamento', 'Keep follow-up, reputation, repeat work, and the next opportunity within reach.': 'Mantenha acompanhamento, reputação, serviços recorrentes e a próxima oportunidade ao alcance.',
+          'Built around the realities of the work.': 'Criada em torno da realidade do trabalho.', 'Every module is being shaped for the details that matter in a service business: time, trust, context, and consistent client relationships.': 'Cada módulo está sendo pensado para os detalhes que importam em um negócio de serviços: tempo, confiança, contexto e relações consistentes com clientes.', 'A clear operating view': 'Uma visão operacional clara', 'See requests, confirmed work, recurring commitments, and client activity without rebuilding the day from scattered conversations.': 'Veja solicitações, serviços confirmados, compromissos recorrentes e atividades de clientes sem reconstruir o dia a partir de conversas dispersas.', 'Context that follows the job': 'Contexto que acompanha o serviço', 'Keep service details, notes, scheduling information, and relationship history connected as work moves forward.': 'Mantenha detalhes do serviço, anotações, informações de agenda e histórico do relacionamento conectados conforme o trabalho avança.', 'Structure for solo professionals and teams': 'Estrutura para profissionais e equipes', 'Start with a simpler personal workflow, then coordinate assignments and shared operations as the business grows.': 'Comece com um fluxo pessoal mais simples e depois coordene atribuições e operações compartilhadas conforme o negócio cresce.', 'A professional presence': 'Uma presença profissional', 'Bring services, experience, reputation, and client-facing information into a profile designed for the cleaning industry.': 'Reúna serviços, experiência, reputação e informações para clientes em um perfil criado para o setor de limpeza.', 'Industry knowledge in the same place': 'Conhecimento do setor no mesmo lugar', 'Learn from practical conversations, build relevant connections, and discover resources without leaving the professional ecosystem.': 'Aprenda com conversas práticas, crie conexões relevantes e descubra recursos sem sair do ecossistema profissional.',
+          'Built for the people who keep the industry moving.': 'Feito para quem mantém o setor em movimento.', 'From independent professionals to growing companies, every experience starts with a real industry need.': 'De profissionais independentes a empresas em crescimento, cada experiência parte de uma necessidade real do setor.', 'PROFESSIONALS': 'PROFISSIONAIS', 'More control, less guesswork.': 'Mais controle, menos incerteza.', 'Centralize your day-to-day work, showcase your services, and find new ways to grow.': 'Centralize sua rotina, apresente seus serviços e encontre novas formas de crescer.', 'BUSINESSES': 'EMPRESAS', 'Operations ready to scale.': 'Operações prontas para escalar.', 'Manage teams, clients, and opportunities with a clearer view of your business.': 'Gerencie equipes, clientes e oportunidades com uma visão mais clara do negócio.', 'CLIENTS': 'CLIENTES', 'A simpler way to hire.': 'Uma forma mais simples de contratar.', 'Discover cleaning professionals and businesses through a practical, trustworthy experience.': 'Encontre profissionais e empresas de limpeza em uma experiência prática e confiável.',
+          'Questions, answered clearly.': 'Perguntas respondidas com clareza.', 'What exactly is iKlinq?': 'O que exatamente é a iKlinq?', 'iKlinq is an ecosystem in development for the cleaning industry. It is designed to bring business management, professional networking, marketplace opportunities, and client connections into one experience.': 'A iKlinq é um ecossistema em desenvolvimento para o setor de limpeza. Ela foi criada para reunir gestão de negócios, rede profissional, oportunidades de marketplace e conexões com clientes em uma única experiência.', 'Who is the platform for?': 'Para quem é a plataforma?', 'It is being designed for independent cleaning professionals, growing cleaning businesses and teams, and clients looking for a clearer way to discover and connect with service providers.': 'Ela está sendo criada para profissionais de limpeza independentes, empresas e equipes em crescimento e clientes que buscam uma forma mais clara de encontrar e se conectar com prestadores de serviços.', 'What could I manage inside the app?': 'O que poderei gerenciar no app?', 'The product concept includes requests, quotes, schedules, recurring work, team coordination, client history, service activity, professional profiles, and an operating overview.': 'O conceito do produto inclui solicitações, orçamentos, agendas, trabalhos recorrentes, coordenação de equipe, histórico de clientes, atividade de serviços, perfis profissionais e uma visão operacional.', 'How are the community and marketplace different?': 'Qual é a diferença entre comunidade e marketplace?', 'The community is focused on professional knowledge and relationships. The marketplace is designed around practical opportunities such as jobs, partnerships, suppliers, and industry resources.': 'A comunidade é focada em conhecimento e relacionamentos profissionais. O marketplace é pensado para oportunidades práticas, como serviços, parcerias, fornecedores e recursos do setor.', 'Where will iKlinq launch first?': 'Onde a iKlinq será lançada primeiro?', 'The initial launch is planned for California. Availability in additional regions will be shared as the product develops.': 'O lançamento inicial está previsto para a Califórnia. A disponibilidade em outras regiões será divulgada conforme o produto evoluir.', 'When will early access be available?': 'Quando o acesso antecipado estará disponível?', 'iKlinq is still in development. The interest list will open before launch, and this page will be updated when registration becomes available.': 'A iKlinq ainda está em desenvolvimento. A lista de interesse será aberta antes do lançamento, e esta página será atualizada quando o cadastro estiver disponível.',
+          'The future of professional cleaning starts here.': 'O futuro da limpeza profissional começa aqui.', 'Join the interest list for product updates and be the first to know when early access becomes available.': 'Entre na lista de interesse para receber novidades e saber primeiro quando o acesso antecipado estiver disponível.', 'Waitlist coming soon': 'Lista de espera em breve', 'Sign-up will be available here before launch.': 'O cadastro estará disponível aqui antes do lançamento.', 'Building new connections for the cleaning industry.': 'Criando novas conexões para o setor de limpeza.'
+        },
+        es: {
+          'Platform': 'Plataforma', 'How it works': 'Cómo funciona', 'Who it’s for': 'Para quién es', 'Early access': 'Acceso anticipado',
+          'Built for the cleaning industry': 'Creado para la industria de la limpieza', 'Your business.': 'Tu negocio.', 'Your connections.': 'Tus conexiones.', 'All in one place.': 'Todo en un solo lugar.',
+          'Business management, a professional network, opportunities, and clients—together in one ecosystem built to transform the day-to-day work of cleaning professionals.': 'Gestión de negocios, red profesional, oportunidades y clientes: todo en un ecosistema creado para transformar el día a día de los profesionales de la limpieza.',
+          'Get early access': 'Quiero acceso anticipado', 'Explore the platform': 'Explorar la plataforma', 'In development • Launching first in California': 'En desarrollo • Lanzamiento inicial en California',
+          'Community': 'Comunidad', 'Connections that make you stronger': 'Conexiones que te fortalecen', 'Marketplace': 'Marketplace', 'Opportunities near you': 'Oportunidades cerca de ti', 'View opportunity →': 'Ver oportunidad →',
+          'Next job': 'Próximo servicio', 'Today, 2:30 PM': 'Hoy, 2:30 p. m.', 'Overview': 'Resumen', 'Good morning,': 'Buenos días,', 'Your business in motion': 'Tu negocio en movimiento', 'Monthly revenue': 'Ingresos mensuales', 'Jobs': 'Servicios', 'Clients': 'Clientes', 'Today’s schedule': 'Agenda de hoy', 'Residential cleaning': 'Limpieza residencial', 'Weekly maintenance': 'Mantenimiento semanal', 'New quote': 'Nuevo presupuesto', 'New connections': 'Nuevas conexiones', '+12 this week': '+12 esta semana',
+          'Everything you need to work, grow, and connect.': 'Todo lo que necesitas para trabajar, crecer y conectar.', 'Simplified management': 'Gestión simplificada', 'Professional network': 'Red profesional', 'New opportunities': 'Nuevas oportunidades',
+          'See the workday come to life.': 'Mira cómo cobra vida la jornada.', 'Explore a conceptual product preview and see how management, community, marketplace, and client tools come together in one seamless experience.': 'Explora una vista conceptual del producto y descubre cómo la gestión, la comunidad, el marketplace y las herramientas para clientes se unen en una experiencia fluida.', 'Management': 'Gestión', 'iKlinq concept prototype': 'Prototipo conceptual de iKlinq',
+          'Schedule': 'Agenda', 'Finances': 'Finanzas', 'Management dashboard': 'Panel de gestión', 'Your business at a glance.': 'Tu negocio de un vistazo.', 'New job +': 'Nuevo servicio +', 'Consolidated view': 'Vista consolidada', 'Organized schedule': 'Agenda organizada', 'Active relationships': 'Relaciones activas', 'Monthly performance': 'Rendimiento mensual', 'Last 6 months': 'Últimos 6 meses', 'Upcoming jobs': 'Próximos servicios', 'View schedule': 'Ver agenda',
+          'Connections': 'Conexiones', 'Messages': 'Mensajes', 'Knowledge that moves everyone forward.': 'Conocimiento que impulsa a todos.', 'Create post +': 'Crear publicación +', 'Community conversations': 'Conversaciones de la comunidad', 'Latest': 'Recientes', 'How do you organize a recurring schedule?': '¿Cómo organizas una agenda recurrente?', 'A practical conversation about workflows, service, and sustainable growth.': 'Una conversación práctica sobre procesos, servicio y crecimiento sostenible.', '12 replies · now': '12 respuestas · ahora', 'Best practices for new quotes': 'Buenas prácticas para nuevos presupuestos', 'Professionals share experience that helps other businesses grow.': 'Profesionales comparten experiencias que ayudan a otros negocios a crecer.', '8 replies · today': '8 respuestas · hoy', 'View all': 'Ver todo',
+          'Specialized marketplace': 'Marketplace especializado', 'What your business needs.': 'Lo que tu negocio necesita.', 'Explore categories': 'Explorar categorías', 'OPPORTUNITIES': 'OPORTUNIDADES', 'New jobs in your area': 'Nuevos servicios en tu zona', 'Find demand aligned with your profile.': 'Encuentra demandas alineadas con tu perfil.', 'SUPPLIERS': 'PROVEEDORES', 'Everyday business solutions': 'Soluciones para el día a día', 'Compare options made for the industry.': 'Compara opciones creadas para el sector.', 'PARTNERSHIPS': 'ALIANZAS', 'Find the right collaborators': 'Encuentra a los colaboradores adecuados', 'Build relevant professional connections.': 'Construye conexiones profesionales relevantes.',
+          'Bookings': 'Reservas', 'Quotes': 'Presupuestos', 'Client relationships': 'Relaciones con clientes', 'Every client connection in one place.': 'Todas las conexiones con clientes en un solo lugar.', 'Add client +': 'Añadir cliente +', 'Requests': 'Solicitudes', 'Awaiting response': 'Esperando respuesta', 'Next 7 days': 'Próximos 7 días', 'Ratings': 'Valoraciones', 'Recognized service': 'Servicio reconocido', 'Recent client activity': 'Actividad reciente de clientes', 'View clients': 'Ver clientes', 'Quote request': 'Solicitud de presupuesto', 'New contact': 'Nuevo contacto', 'Scheduled job': 'Servicio programado', 'Confirmed': 'Confirmado', 'Follow-up requested': 'Seguimiento solicitado', 'Conversation in progress': 'Conversación en curso', 'Reply': 'Responder',
+          'Choose an area above to explore the product concept. The preview advances automatically and pauses while you interact.': 'Elige un área para explorar el concepto del producto. La vista previa avanza automáticamente y se pausa mientras interactúas.',
+          'One app. Every part of the workday.': 'Una app. Cada parte de la jornada.', 'Follow the modules from the first appointment to the next opportunity—each screen designed to keep the business moving.': 'Sigue los módulos desde la primera cita hasta la próxima oportunidad: cada pantalla está diseñada para mantener el negocio en movimiento.', 'Run the day': 'Organiza el día', 'Today’s revenue': 'Ingresos de hoy', 'Learn together': 'Aprende en comunidad', 'Pricing recurring services': 'Precios de servicios recurrentes', '14 replies · active now': '14 respuestas · activo ahora', 'Building a reliable team': 'Formar un equipo confiable', '9 replies · today': '9 respuestas · hoy', 'Share your best workflow': 'Comparte tu mejor proceso', 'Join the conversation': 'Únete a la conversación', 'Find what’s next': 'Encuentra lo que sigue', 'New local opportunity': 'Nueva oportunidad local', 'Recurring residential service': 'Servicio residencial recurrente', 'View details →': 'Ver detalles →', 'Supplier partnership': 'Alianza con proveedor', 'Solutions for growing teams': 'Soluciones para equipos en crecimiento', 'Explore →': 'Explorar →', 'Industry resources': 'Recursos del sector', 'Tools selected for cleaning businesses': 'Herramientas seleccionadas para empresas de limpieza', 'Discover →': 'Descubrir →', 'Stay connected': 'Mantente conectado', 'Job confirmed': 'Servicio confirmado', 'Tomorrow · 10:00': 'Mañana · 10:00', 'New review': 'Nueva valoración', '5 stars': '5 estrellas', 'Follow-up': 'Seguimiento', 'Ready to reply': 'Listo para responder',
+          'More than an app.': 'Más que una app.', 'An ecosystem.': 'Un ecosistema.', 'iKlinq brings together the parts that are currently disconnected: operations, professional relationships, hiring, and the client experience.': 'iKlinq reúne lo que hoy está desconectado: operaciones, relaciones profesionales, contratación y experiencia del cliente.', 'Manage with clarity': 'Gestiona con claridad', 'Organize your schedule, clients, jobs, team, and finances without juggling scattered tools.': 'Organiza agenda, clientes, servicios, equipo y finanzas sin depender de herramientas dispersas.', 'Build your network': 'Fortalece tu red', 'Share experience, strengthen your reputation, and find a community that understands your work.': 'Comparte experiencias, fortalece tu reputación y encuentra una comunidad que entiende tu trabajo.', 'Find opportunities': 'Encuentra oportunidades', 'Access jobs, partnerships, suppliers, and resources designed for the cleaning industry.': 'Accede a servicios, alianzas, proveedores y recursos creados para el sector de la limpieza.', 'Connect with clients': 'Conecta con clientes', 'Make discovery, booking, and hiring simpler through a more trustworthy experience.': 'Simplifica el descubrimiento, la reserva y la contratación con una experiencia más confiable.',
+          'From the first request to the next stage of growth.': 'Desde la primera solicitud hasta la siguiente etapa de crecimiento.', 'iKlinq is being designed around the complete operating rhythm of a cleaning business—not just one isolated task.': 'iKlinq se está diseñando alrededor de todo el ritmo operativo de un negocio de limpieza, no de una sola tarea aislada.', 'Requests and quotes': 'Solicitudes y presupuestos', 'Keep new inquiries, service details, quotes, and follow-ups organized in one clear flow.': 'Mantén nuevas consultas, detalles del servicio, presupuestos y seguimientos organizados en un flujo claro.', 'Scheduling and recurring work': 'Agenda y servicios recurrentes', 'Plan one-time and recurring services while keeping the day, team, and client commitments aligned.': 'Planifica servicios puntuales y recurrentes manteniendo alineados el día, el equipo y los compromisos con clientes.', 'Team coordination': 'Coordinación del equipo', 'Bring assignments, job context, and daily operations together as a company grows beyond one person.': 'Reúne asignaciones, contexto de los servicios y operaciones diarias a medida que la empresa crece más allá de una persona.', 'Client relationships': 'Relaciones con clientes', 'See requests, bookings, service history, and conversations with the context needed to deliver a consistent experience.': 'Consulta solicitudes, reservas, historial de servicios y conversaciones con el contexto necesario para ofrecer una experiencia consistente.', 'Profile and reputation': 'Perfil y reputación', 'Present services professionally, build credibility, and learn alongside people who understand the industry.': 'Presenta servicios de forma profesional, genera credibilidad y aprende junto a personas que entienden el sector.', 'Marketplace and opportunity': 'Marketplace y oportunidades', 'Discover jobs, partnerships, suppliers, and practical resources within the same professional ecosystem.': 'Descubre servicios, alianzas, proveedores y recursos prácticos dentro del mismo ecosistema profesional.',
+          'One connected journey, from inquiry to growth.': 'Un recorrido conectado, desde la solicitud hasta el crecimiento.', 'Instead of moving the same information between messages, calendars, notes, and separate tools, iKlinq is designed to keep every stage connected.': 'En lugar de mover la misma información entre mensajes, calendarios, notas y herramientas separadas, iKlinq está diseñada para mantener cada etapa conectada.',
+          'STEP 01': 'PASO 01', 'Receive a request': 'Recibe una solicitud', 'Capture the service need, client context, location, and preferred timing in one starting point.': 'Reúne la necesidad del servicio, el contexto del cliente, la ubicación y el horario preferido en un solo punto de partida.', 'STEP 02': 'PASO 02', 'Build the quote': 'Prepara el presupuesto', 'Keep scope, pricing context, and follow-up connected to the original conversation.': 'Mantén el alcance, el contexto del precio y el seguimiento vinculados a la conversación original.', 'STEP 03': 'PASO 03', 'Plan the work': 'Planifica el trabajo', 'Turn approved services into scheduled work, including recurring routines and team assignments.': 'Convierte los servicios aprobados en trabajos programados, incluidas rutinas recurrentes y asignaciones del equipo.', 'STEP 04': 'PASO 04', 'Deliver with context': 'Trabaja con contexto', 'Bring job details, client history, and daily priorities together before the work begins.': 'Reúne los detalles del servicio, el historial del cliente y las prioridades del día antes de comenzar.', 'STEP 05': 'PASO 05', 'Strengthen the relationship': 'Fortalece la relación', 'Keep follow-up, reputation, repeat work, and the next opportunity within reach.': 'Mantén al alcance el seguimiento, la reputación, los servicios recurrentes y la próxima oportunidad.',
+          'Built around the realities of the work.': 'Creada para la realidad del trabajo.', 'Every module is being shaped for the details that matter in a service business: time, trust, context, and consistent client relationships.': 'Cada módulo se está diseñando para los detalles que importan en un negocio de servicios: tiempo, confianza, contexto y relaciones consistentes con clientes.', 'A clear operating view': 'Una visión operativa clara', 'See requests, confirmed work, recurring commitments, and client activity without rebuilding the day from scattered conversations.': 'Consulta solicitudes, trabajos confirmados, compromisos recurrentes y actividad de clientes sin reconstruir el día a partir de conversaciones dispersas.', 'Context that follows the job': 'Contexto que acompaña el servicio', 'Keep service details, notes, scheduling information, and relationship history connected as work moves forward.': 'Mantén conectados los detalles del servicio, las notas, la información de agenda y el historial de la relación a medida que avanza el trabajo.', 'Structure for solo professionals and teams': 'Estructura para profesionales y equipos', 'Start with a simpler personal workflow, then coordinate assignments and shared operations as the business grows.': 'Empieza con un flujo personal más simple y luego coordina asignaciones y operaciones compartidas a medida que crece el negocio.', 'A professional presence': 'Una presencia profesional', 'Bring services, experience, reputation, and client-facing information into a profile designed for the cleaning industry.': 'Reúne servicios, experiencia, reputación e información para clientes en un perfil creado para la industria de la limpieza.', 'Industry knowledge in the same place': 'Conocimiento del sector en el mismo lugar', 'Learn from practical conversations, build relevant connections, and discover resources without leaving the professional ecosystem.': 'Aprende de conversaciones prácticas, crea conexiones relevantes y descubre recursos sin salir del ecosistema profesional.',
+          'Built for the people who keep the industry moving.': 'Creado para quienes mantienen la industria en movimiento.', 'From independent professionals to growing companies, every experience starts with a real industry need.': 'Desde profesionales independientes hasta empresas en crecimiento, cada experiencia parte de una necesidad real del sector.', 'PROFESSIONALS': 'PROFESIONALES', 'More control, less guesswork.': 'Más control, menos incertidumbre.', 'Centralize your day-to-day work, showcase your services, and find new ways to grow.': 'Centraliza tu trabajo diario, muestra tus servicios y encuentra nuevas formas de crecer.', 'BUSINESSES': 'EMPRESAS', 'Operations ready to scale.': 'Operaciones listas para escalar.', 'Manage teams, clients, and opportunities with a clearer view of your business.': 'Gestiona equipos, clientes y oportunidades con una visión más clara del negocio.', 'CLIENTS': 'CLIENTES', 'A simpler way to hire.': 'Una forma más simple de contratar.', 'Discover cleaning professionals and businesses through a practical, trustworthy experience.': 'Encuentra profesionales y empresas de limpieza mediante una experiencia práctica y confiable.',
+          'Questions, answered clearly.': 'Preguntas respondidas con claridad.', 'What exactly is iKlinq?': '¿Qué es exactamente iKlinq?', 'iKlinq is an ecosystem in development for the cleaning industry. It is designed to bring business management, professional networking, marketplace opportunities, and client connections into one experience.': 'iKlinq es un ecosistema en desarrollo para la industria de la limpieza. Está diseñado para reunir gestión de negocios, red profesional, oportunidades de marketplace y conexiones con clientes en una sola experiencia.', 'Who is the platform for?': '¿Para quién es la plataforma?', 'It is being designed for independent cleaning professionals, growing cleaning businesses and teams, and clients looking for a clearer way to discover and connect with service providers.': 'Se está diseñando para profesionales de limpieza independientes, empresas y equipos en crecimiento y clientes que buscan una forma más clara de encontrar y conectar con proveedores de servicios.', 'What could I manage inside the app?': '¿Qué podré gestionar en la app?', 'The product concept includes requests, quotes, schedules, recurring work, team coordination, client history, service activity, professional profiles, and an operating overview.': 'El concepto del producto incluye solicitudes, presupuestos, agendas, trabajos recurrentes, coordinación de equipos, historial de clientes, actividad de servicios, perfiles profesionales y una visión operativa.', 'How are the community and marketplace different?': '¿Cuál es la diferencia entre la comunidad y el marketplace?', 'The community is focused on professional knowledge and relationships. The marketplace is designed around practical opportunities such as jobs, partnerships, suppliers, and industry resources.': 'La comunidad se centra en el conocimiento y las relaciones profesionales. El marketplace está diseñado para oportunidades prácticas como servicios, alianzas, proveedores y recursos del sector.', 'Where will iKlinq launch first?': '¿Dónde se lanzará iKlinq primero?', 'The initial launch is planned for California. Availability in additional regions will be shared as the product develops.': 'El lanzamiento inicial está previsto en California. La disponibilidad en otras regiones se comunicará a medida que avance el producto.', 'When will early access be available?': '¿Cuándo estará disponible el acceso anticipado?', 'iKlinq is still in development. The interest list will open before launch, and this page will be updated when registration becomes available.': 'iKlinq aún está en desarrollo. La lista de interés se abrirá antes del lanzamiento y esta página se actualizará cuando el registro esté disponible.',
+          'The future of professional cleaning starts here.': 'El futuro de la limpieza profesional empieza aquí.', 'Join the interest list for product updates and be the first to know when early access becomes available.': 'Únete a la lista de interés para recibir novedades y ser el primero en saber cuándo estará disponible el acceso anticipado.', 'Waitlist coming soon': 'Lista de espera próximamente', 'Sign-up will be available here before launch.': 'El registro estará disponible aquí antes del lanzamiento.', 'Building new connections for the cleaning industry.': 'Creando nuevas conexiones para la industria de la limpieza.'
+        }
+      };
+
+      var translatableNodes = [];
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      var textNode;
+      while ((textNode = walker.nextNode())) {
+        var key = textNode.nodeValue.trim();
+        if (key && ((translations.pt && translations.pt[key]) || (translations.es && translations.es[key]))) {
+          translatableNodes.push({ node: textNode, key: key, before: textNode.nodeValue.match(/^\s*/)[0], after: textNode.nodeValue.match(/\s*$/)[0] });
+        }
+      }
+
+      var localeMeta = {
+        en: { title: 'iKlinq — The ecosystem for cleaning professionals', description: 'Management, connections, opportunities, and clients in one ecosystem built for cleaning professionals and businesses.', nav: 'Sections', language: 'Language' },
+        pt: { title: 'iKlinq — O ecossistema para profissionais de limpeza', description: 'Gestão, conexões, oportunidades e clientes em um ecossistema para profissionais e empresas de limpeza.', nav: 'Seções', language: 'Idioma' },
+        es: { title: 'iKlinq — El ecosistema para profesionales de la limpieza', description: 'Gestión, conexiones, oportunidades y clientes en un ecosistema para profesionales y empresas de limpieza.', nav: 'Secciones', language: 'Idioma' }
+      };
+      var languageButtons = Array.prototype.slice.call(document.querySelectorAll('[data-lang]'));
+      var nav = document.querySelector('.nav-links');
+      var languageGroup = document.querySelector('.language-switcher');
+
+      function setLanguage(lang) {
+        var dictionary = translations[lang] || {};
+        translatableNodes.forEach(function (item) {
+          item.node.nodeValue = item.before + (dictionary[item.key] || item.key) + item.after;
+        });
+        document.documentElement.lang = lang;
+        document.title = localeMeta[lang].title;
+        document.querySelector('meta[name="description"]').setAttribute('content', localeMeta[lang].description);
+        nav.setAttribute('aria-label', localeMeta[lang].nav);
+        languageGroup.setAttribute('aria-label', localeMeta[lang].language);
+        languageButtons.forEach(function (button) { button.setAttribute('aria-pressed', button.getAttribute('data-lang') === lang ? 'true' : 'false'); });
+      }
+
+      languageButtons.forEach(function (button) {
+        button.addEventListener('click', function () { setLanguage(button.getAttribute('data-lang')); });
+      });
+
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll('.trust-item, .section-head > *, .feature, .tour-intro > *, .showcase, .mockup-reel-head > *, .mini-phone, .workflow-card, .journey-step, .detail-intro, .detail-item, .audience-card, .faq-layout > *, .waitlist-panel'));
+      revealItems.forEach(function (item, index) {
+        item.classList.add('reveal');
+        item.style.setProperty('--reveal-delay', String((index % 4) * 70) + 'ms');
+      });
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+        revealItems.forEach(function (item) { observer.observe(item); });
+        window.setTimeout(function () {
+          revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+        }, 1600);
+      } else {
+        revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+      }
+
+      var stage = document.querySelector('.product-stage');
+      if (stage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        stage.addEventListener('pointermove', function (event) {
+          var rect = stage.getBoundingClientRect();
+          var x = ((event.clientX - rect.left) / rect.width - .5) * 12;
+          var y = ((event.clientY - rect.top) / rect.height - .5) * 10;
+          stage.style.setProperty('--stage-x', x.toFixed(1) + 'px');
+          stage.style.setProperty('--stage-y', y.toFixed(1) + 'px');
+        });
+        stage.addEventListener('pointerleave', function () {
+          stage.style.setProperty('--stage-x', '0px');
+          stage.style.setProperty('--stage-y', '0px');
+        });
+      }
+
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tour-tab'));
+      var panels = Array.prototype.slice.call(document.querySelectorAll('.tour-panel'));
+      var counter = document.querySelector('.screen-counter');
+      var showcase = document.querySelector('.showcase');
+      var progress = document.querySelector('.tour-progress i');
+      var activeIndex = 0;
+      var timer;
+
+      function restartProgress() {
+        progress.style.animation = 'none';
+        void progress.offsetWidth;
+        progress.style.animation = '';
+      }
+      function activate(tab) {
+        var screen = tab.getAttribute('data-screen');
+        activeIndex = tabs.indexOf(tab);
+        tabs.forEach(function (item) { item.setAttribute('aria-pressed', item === tab ? 'true' : 'false'); });
+        panels.forEach(function (panel) { panel.classList.toggle('active', panel.getAttribute('data-panel') === screen); });
+        counter.textContent = String(activeIndex + 1).padStart(2, '0') + ' / 04';
+        restartProgress();
+      }
+      function startTour() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        clearInterval(timer);
+        showcase.classList.remove('is-paused');
+        timer = setInterval(function () { activate(tabs[(activeIndex + 1) % tabs.length]); }, 6000);
+      }
+      function pauseTour() {
+        clearInterval(timer);
+        showcase.classList.add('is-paused');
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener('click', function () { activate(tab); startTour(); });
+        tab.addEventListener('keydown', function (event) {
+          if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+          event.preventDefault();
+          var direction = event.key === 'ArrowRight' ? 1 : -1;
+          var next = tabs[(index + direction + tabs.length) % tabs.length];
+          next.focus();
+          activate(next);
+        });
+      });
+      showcase.addEventListener('pointerenter', pauseTour);
+      showcase.addEventListener('pointerleave', startTour);
+      showcase.addEventListener('focusin', pauseTour);
+      showcase.addEventListener('focusout', startTour);
+      startTour();
+    }());
+  </script>
+</body>
+</html>
